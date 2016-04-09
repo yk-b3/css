@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block title %}アカウント情報{% endblock title %}
+
+{% block extrahead %}
+<style>
+table {
+  margin-top: 8px;
+}
+</style>
+{% endblock %}
+
+{% block content %}
+    <h3 class="page-header">アカウント情報</h3>
+
+    <a href="{% url 'cms:book_add' %}" class="btn btn-default btn-sm">追加</a>
+    <table class="table table-striped table-bordered">
+      <thead>
+        <tr>
+　　　　　 <th>ID</th><!--　主キー　-->
+          <th>名前</th>
+          <th>住所</th>
+          <th>メールアドレス</th>
+          <th>操作</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for book in books %}
+        <tr>
+　　　　　<td>{{ book.id }}</td><!--　主キー　-->
+          <td>{{ book.name }}</td>
+          <td>{{ book.publisher }}</td>
+          <td>{{ book.page }}</td>
+          <td>
+            <a href="{% url 'cms:book_mod' book_id=book.id %}" class="btn btn-default btn-sm">修正</a>
+            <a href="{% url 'cms:book_del' book_id=book.id %}" class="btn btn-default btn-sm">削除</a>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+{% endblock content %}
